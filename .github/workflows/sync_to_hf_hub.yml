@@ -16,4 +16,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://rbgo:$HF_TOKEN@huggingface.co/spaces/gapup-prediction main
+        run: git push --force https://rbgo:$HF_TOKEN@huggingface.co/spaces/rbgo/gapup-prediction main
