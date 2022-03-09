@@ -3,7 +3,6 @@ import pandas as pd
 import datetime
 import numpy as np
 import datetime
-import helper
 import all_model
 
 def show_information():
@@ -23,17 +22,20 @@ def select_date():
     
     return selected_date
 
-@st.cache
-def prepare_data_for_selected_date():
-    df = pd.read_csv("dataset/reliance_30min.csv")
-    df = helper.format_date(df)
-    df = helper.replace_vol(df)
-    df = helper.feature_main(df) 
+# @st.cache
+# def prepare_data_for_selected_date():
+#     df = pd.read_csv("dataset/reliance_30min.csv")
+#     df = helper.format_date(df)
+#     df = helper.replace_vol(df)
+#     df = helper.feature_main(df)
+#     df.to_csv('dataset/processed_reliance30m.csv')
     
-    return df
+#     return df
 
-def freature_data(df,date):
+@st.cache
+def freature_data(date):
     # st.dataframe(df.loc[str(date)])
+    df = pd.read_csv("dataset/processed_reliance30m.csv",parse_dates=['Datetime']).set_index('Datetime')
     df = df.loc[str(date)]
     df = df.drop(columns=['date'],axis=1)
     
@@ -65,8 +67,8 @@ def main():
         # About Reliance Stock
         show_information()
         selected_date = select_date()
-        prepared_data = prepare_data_for_selected_date()
-        prepared_data = freature_data(prepared_data,selected_date)
+        # prepared_data = prepare_data_for_selected_date()
+        prepared_data = freature_data(selected_date)
         score = show_prediction_result(prepared_data)
         st.write('')
         selected_date+=datetime.timedelta(days=1)
