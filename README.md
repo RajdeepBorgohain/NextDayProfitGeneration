@@ -12,3 +12,6 @@ license: other
 
 # NextDayProfitGeneration
 Predicting the next day gap-up opening of any stock using Machine Learning.
+
+
+Use this link for HuggingFace SPACE: https://huggingface.co/spaces/rbgo/gapup-prediction
